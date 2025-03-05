@@ -14,8 +14,9 @@ React crypto app — приложение связанное с криптова
 
 <img alt="react" src="https://img.shields.io/badge/react-61DAFB.svg?style=for-the-badge&logo=react&logoColor=black" height="40"/>
 
+<img alt="antdesign" src="https://img.shields.io/badge/ant_design-0170FE.svg?style=for-the-badge&logo=antdesign&logoColor=white" height="40"/>
+
 ## Особенности:
-TO DO: дописать
 
 ## Ссылка на деплой: 
 TO DO: дописать

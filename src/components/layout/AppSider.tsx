@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Layout, Card, Statistic, List, Spin, Typography, Tag } from "antd";
+import { Layout, Card, Statistic, List, Typography, Tag } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import { BaseType } from "antd/es/typography/Base";
 import CriptoContext from "../../context/cripto-context";
@@ -10,14 +10,8 @@ const siderStyle: React.CSSProperties = {
   padding: "1rem"
 };
 
-
 export default function AppSider() {
-  const { assets, loading } = useContext(CriptoContext);
-  
-  if (loading) return (
-    <Spin fullscreen />
-  )
-
+  const { assets } = useContext(CriptoContext);
 
   return (
     <Sider width="25%" style={siderStyle}>

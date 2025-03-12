@@ -1,8 +1,4 @@
-import React, {
-  createContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Asset, Cripto } from "../data";
 import { fetchCriptData, fetchCriptoAssets } from "../api";
 import percentDifference from "../utils/percentDifference";
@@ -18,25 +14,25 @@ interface AssetPro extends Asset {
   totalProfit: number;
 }
 
-interface CriptoContext {
+interface CryptoContext {
   assets: AssetPro[];
   cripto: Cripto[];
   loading: boolean;
 }
 
-const CRIPTO_CONTEXT_DEFAULT: CriptoContext = {
+const CRYPTO_CONTEXT_DEFAULT: CryptoContext = {
   assets: [],
   cripto: [],
   loading: false,
 };
 
-const CriptoContext = createContext<CriptoContext>(CRIPTO_CONTEXT_DEFAULT);
+const CriptoContext = createContext<CryptoContext>(CRYPTO_CONTEXT_DEFAULT);
 export default CriptoContext;
 
 export function CriptoContextProvider({ children }: Props) {
-  const [loading, setLoading] = useState<CriptoContext["loading"]>(false);
-  const [cripto, setCripto] = useState<CriptoContext["cripto"]>([]);
-  const [assets, setAssets] = useState<CriptoContext["assets"]>([]);
+  const [loading, setLoading] = useState<CryptoContext["loading"]>(false);
+  const [cripto, setCripto] = useState<CryptoContext["cripto"]>([]);
+  const [assets, setAssets] = useState<CryptoContext["assets"]>([]);
 
   useEffect(() => {
     async function preload() {
@@ -70,3 +66,4 @@ export function CriptoContextProvider({ children }: Props) {
     </CriptoContext.Provider>
   );
 }
+

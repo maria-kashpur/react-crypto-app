@@ -1,17 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Layout, Card, Statistic, List, Typography, Tag } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import { BaseType } from "antd/es/typography/Base";
-import CriptoContext from "../../context/cripto-context";
+import { useCrypto } from "../../hooks/useCripto";
 
 const { Sider } = Layout;
 
 const siderStyle: React.CSSProperties = {
-  padding: "1rem"
+  padding: "1rem",
 };
 
 export default function AppSider() {
-  const { assets } = useContext(CriptoContext);
+  const { assets } = useCrypto();
 
   return (
     <Sider width="25%" style={siderStyle}>
@@ -32,7 +32,11 @@ export default function AppSider() {
                 value: asset.totalProfit.toFixed(2),
                 plain: "$",
                 color: asset.grow ? "success" : "danger",
-                tag: <Tag color={asset.grow ? "green" : "red" }>{asset.growPercent}%</Tag>
+                tag: (
+                  <Tag color={asset.grow ? "green" : "red"}>
+                    {asset.growPercent}%
+                  </Tag>
+                ),
               },
               { title: "Asset Amount", value: asset.amount },
             ]}
@@ -40,13 +44,13 @@ export default function AppSider() {
             renderItem={(item) => (
               <List.Item>
                 <span>{item.title}</span>
-                  <span>
-                    {item.tag ?? ""}
-                    <Typography.Text type={item.color as (BaseType | undefined)}>
+                <span>
+                  {item.tag ?? ""}
+                  <Typography.Text type={item.color as BaseType | undefined}>
                     {item.value}
                     {item.plain ?? ""}
-                    </Typography.Text>
-                  </span>
+                  </Typography.Text>
+                </span>
               </List.Item>
             )}
           />

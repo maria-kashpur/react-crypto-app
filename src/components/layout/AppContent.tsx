@@ -1,5 +1,6 @@
 import React from "react";
-import { Layout } from "antd";
+import { Layout, Typography } from "antd";
+import { useCrypto } from "../../hooks/useCripto";
 
 const { Content } = Layout;
 
@@ -12,5 +13,13 @@ const contentStyle: React.CSSProperties = {
 };
 
 export default function AppContent() {
-  return <Content style={contentStyle}>Content</Content>;
+  const { getTotalAmount } = useCrypto();
+
+  return (
+    <Content style={contentStyle}>
+      <Typography.Title level={3} style={{ textAlign: "left", color: "#fff" }}>
+        Portfolio: {getTotalAmount ? getTotalAmount() : 0}$
+      </Typography.Title>
+    </Content>
+  );
 }

@@ -19,6 +19,7 @@ interface CryptoContext {
   cripto: Cripto[];
   loading: boolean;
   addAsset?: (data: Asset) => void;
+  getTotalAmount?: () => number;
 }
 
 const CRYPTO_CONTEXT_DEFAULT: CryptoContext = {
@@ -70,8 +71,21 @@ export function CriptoContextProvider({ children }: Props) {
     setAssets(prev => [...prev, newAsset])
   }
 
+  function getTotalAmount(): number {
+    const cryptoPriceMap = cripto.reduce((acc: {[key: string]: number}, c) => {
+      acc[c.id] = c.price;
+      return acc;
+    }, {});
+
+    return +(assets
+      .map((asset) => asset.amount * cryptoPriceMap[asset.id])
+      .reduce((acc, v) => (acc += v), 0)
+      .toFixed(2));
+  }
+
   return (
-    <CriptoContext.Provider value={{ assets, cripto, loading, addAsset }}>
+    <CriptoContext.Provider
+      value={{ assets, cripto, loading, addAsset, getTotalAmount }}>
       {children}
     </CriptoContext.Provider>
   );

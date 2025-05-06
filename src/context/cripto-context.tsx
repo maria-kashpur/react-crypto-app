@@ -18,6 +18,7 @@ interface CryptoContext {
   assets: AssetPro[];
   cripto: Cripto[];
   loading: boolean;
+  addAsset?: (data: Asset) => void;
 }
 
 const CRYPTO_CONTEXT_DEFAULT: CryptoContext = {
@@ -40,28 +41,37 @@ export function CriptoContextProvider({ children }: Props) {
       const { result } = await fetchCriptData();
       const assets = await fetchCriptoAssets();
       setCripto(result);
-      setAssets(
-        assets.map((asset) => {
-          const coin = result.find((c) => c.id === asset.id);
-          if (coin === undefined) {
-            throw new Error("id is not found");
-          }
-          return {
-            grow: asset.price < coin.price,
-            growPercent: percentDifference(asset.price, coin.price),
-            totalAmount: asset.amount * coin.price,
-            totalProfit: asset.amount * coin.price - asset.amount * asset.price,
-            ...asset,
-          };
-        })
-      );
+      setAssets(assets.map((asset) => mapAsset(asset, result)));
     }
 
     preload().finally(() => setLoading(false));
   }, []);
 
+  function mapAsset(asset: Asset, result: Cripto[]): AssetPro {
+    const coin = result.find((c) => c.id === asset.id);
+
+    if (coin === undefined) {
+      throw new Error("id is not found");
+    }
+
+    return {
+      grow: asset.price < coin.price,
+      growPercent: percentDifference(asset.price, coin.price),
+      totalAmount: asset.amount * coin.price,
+      totalProfit: asset.amount * coin.price - asset.amount * asset.price,
+      ...asset,
+    };
+        
+  }
+
+  function addAsset(data: Asset): void {
+    const newAsset = mapAsset(data, cripto)
+
+    setAssets(prev => [...prev, newAsset])
+  }
+
   return (
-    <CriptoContext.Provider value={{ assets, cripto, loading }}>
+    <CriptoContext.Provider value={{ assets, cripto, loading, addAsset }}>
       {children}
     </CriptoContext.Provider>
   );

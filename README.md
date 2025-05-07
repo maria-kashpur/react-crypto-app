@@ -1,6 +1,8 @@
 # React crypto app
 React crypto app — приложение связанное с криптовалютами.
 
+![project](image.png)
+
 ## Используемые технологии:
 
 <img alt="vite" src="https://img.shields.io/badge/vite-646CFF.svg?style=for-the-badge&logo=vite&logoColor=white" height="40"/>
@@ -19,7 +21,7 @@ React crypto app — приложение связанное с криптова
 Приложение написано в учебных целях на базе обучающего видео Владилена Минина (https://youtu.be/S4HOy6yTclU?si=qqwBbSvLLSMmID01). 
 Также самостоятельно:
 - добавлено подключение к https://openapi.coinstats.app/, 
-- написан проект на typescript (без использования any)
+-  проект написан на typescript (без использования any).
 
 ## Ссылка на деплой: 
-TO DO: дописать
+https://maria-kashpur.github.io/react-crypto-app/

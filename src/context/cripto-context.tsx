@@ -12,6 +12,7 @@ interface AssetPro extends Asset {
   growPercent: number;
   totalAmount: number;
   totalProfit: number;
+  name: string;
 }
 
 interface CryptoContext {
@@ -60,6 +61,7 @@ export function CriptoContextProvider({ children }: Props) {
       growPercent: percentDifference(asset.price, coin.price),
       totalAmount: asset.amount * coin.price,
       totalProfit: asset.amount * coin.price - asset.amount * asset.price,
+      name: coin.name,
       ...asset,
     };
         

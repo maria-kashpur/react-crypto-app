@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout, Typography } from "antd";
 import { useCrypto } from "../../hooks/useCripto";
+import PortfolioChart from "../PortfolioChart";
 
 const { Content } = Layout;
 
@@ -20,6 +21,7 @@ export default function AppContent() {
       <Typography.Title level={3} style={{ textAlign: "left", color: "#fff" }}>
         Portfolio: {getTotalAmount ? getTotalAmount() : 0}$
       </Typography.Title>
+      <PortfolioChart/>
     </Content>
   );
 }

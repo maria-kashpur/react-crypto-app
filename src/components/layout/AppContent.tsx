@@ -2,6 +2,7 @@ import React from "react";
 import { Layout, Typography } from "antd";
 import { useCrypto } from "../../hooks/useCripto";
 import PortfolioChart from "../PortfolioChart";
+import AssetsTable from "../AssetsTable";
 
 const { Content } = Layout;
 
@@ -22,6 +23,7 @@ export default function AppContent() {
         Portfolio: {getTotalAmount ? getTotalAmount() : 0}$
       </Typography.Title>
       <PortfolioChart/>
+      <AssetsTable/>
     </Content>
   );
 }
